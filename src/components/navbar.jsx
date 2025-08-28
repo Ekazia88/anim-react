@@ -11,7 +11,7 @@ const Navbar = () => {
                         <h1 className="hover:text-black hover:cursor-pointer">Seasons</h1>
                         <FaCaretDown/>    
                     </a>
-                    <h1 className="hover:text-black hover:cursor-pointer">Top 10 Anime</h1>
+                    <h1 className="hover:text-black hover:cursor-pointer">Top 10 Anime x</h1>
                     <h1 className="hover:text-black hover:cursor-pointer">Vote Your Choice</h1>
                 </div>
             </div>
