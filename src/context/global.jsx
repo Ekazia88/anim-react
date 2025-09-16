@@ -12,13 +12,16 @@ const GET_AIRING = "GET_AIRING";
 const GET_PICTURES = "GET_PICTURES";
 const SET_SEARCH = "SET_SEARCH";
 const CLEAR_SEARCH = "CLEAR_SEARCH";
+const GET_SEASONSNOW = "GET_SEASONSNOW";
 
 const reducer = (state, action) => {
     switch(action.type) {
         case LOADING:
             return {...state, loading: true};
         case GET_SEASONS:
-            return {...state, SeasonsAnime: action.payload, loading: false};   
+            return {...state, SeasonsAnime: action.payload, loading: false};
+        case GET_SEASONSNOW:
+            return {...state, seasonsnow: action.payload, loading: false};   
         default:
             return state;
     }
@@ -31,7 +34,9 @@ export const GlobalContextProvider = ({children}) => {
         pictures : [],
         isSearch: false,
         searchResults: [],
+        seasonsnow: [],
         loading: false,
+        
     }
     const [state, dispatch] = useReducer(reducer, initialState);
     const getSeasonsAnime = async() => {
@@ -48,6 +53,7 @@ export const GlobalContextProvider = ({children}) => {
     }
     React.useEffect(() => {
         getSeasonsAnime();
+        getSeasonsNow();
     }, []);
 
     return (
