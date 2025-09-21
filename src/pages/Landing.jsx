@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useGlobalContext } from "../context/global";
-import { flattenSeasons, detectCurrentSeason, getSeasonDateRange } from "../components/Seasondata";
+import Card from "../components/Card";
+import { flattenSeasons, detectCurrentSeason, getSeasonDateRange,} from "../components/Seasondata";
 
 const Landing = () => {
   const { SeasonsAnime } = useGlobalContext();
@@ -63,7 +64,10 @@ const Landing = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-center items-center w-full">
+      <div className="flex justify-center items-center w-full gap-4 bg-red-200">
+        <Card />
+        <Card />
+        <Card />
         <h1 className="text-black text-3xl font-bold">This is Landing Page</h1>
       </div>
     </div>
