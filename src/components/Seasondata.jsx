@@ -1,4 +1,5 @@
 const seasonOrder = ["winter", "spring", "summer", "fall"];
+import React from "react";
 export const getSeasonDateRange = (season, year) => {
   switch (season.toLowerCase()) {
     case "winter":
@@ -13,9 +14,9 @@ export const getSeasonDateRange = (season, year) => {
       return `${year}`;
   }
 };
-export const flattenSeasons = (SeasonsAnime) => {
+export const flattenSeasons = (SeasonsList) => {
   const allSeasons = [];
-  SeasonsAnime.forEach((item) => {
+  SeasonsList.forEach((item) => {
     item.seasons.forEach((season) => {
       allSeasons.push({ year: item.year, season });
     });
@@ -48,3 +49,7 @@ export const detectCurrentSeason = (seasonsArray) => {
  
      return index !== -1 ? index : 0; // fallback to first if not found
 };
+export const dataAnimeSeasonsList = (data) =>{
+  const ListAnime = []
+  
+}

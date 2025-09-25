@@ -5,18 +5,18 @@ import Card from "../components/Card";
 import { flattenSeasons, detectCurrentSeason, getSeasonDateRange,} from "../components/Seasondata";
 
 const Landing = () => {
-  const { SeasonsAnime } = useGlobalContext();
-  const [currentSeason, setCurrentSeason] = useState(0);
+  const { SeasonsListAnime, ListAnimeSeasons,getListAnimeSeasons } = useGlobalContext();
+  const [currentSeason, setCurrentSeason,] = useState(0);
 
-  const allSeasons = flattenSeasons(SeasonsAnime);
- 
+  const allSeasons = flattenSeasons(SeasonsListAnime);
   // Auto-detect season when API data loads
  useEffect(() => {
   if (allSeasons.length > 0) {
     const index = detectCurrentSeason(allSeasons);
     setCurrentSeason(index);
+    
   }
-}, [SeasonsAnime]);
+}, [SeasonsListAnime,ListAnimeSeasons,getListAnimeSeasons]);
 
   const SeasonRender =
     allSeasons.length > 0 ? (
@@ -64,11 +64,12 @@ const Landing = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-center items-center w-full gap-4 bg-red-200">
-        <Card />
-        <Card />
-        <Card />
-        <h1 className="text-black text-3xl font-bold">This is Landing Page</h1>
+      <div className="flex justify-center w-full  bg-red-200">
+        <span className="grid grid-cols-6 gap-12">
+          <Card status="finished airing"/>
+        </span>
+        
+        {/* <h1 className="text-black text-3xl font-bold">This is Landing Page</h1> */}
       </div>
     </div>
   );

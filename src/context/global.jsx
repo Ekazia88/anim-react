@@ -6,29 +6,33 @@ const GlobalContext = createContext();
 const baseUrl = "https://api.jikan.moe/v4";
 
 const LOADING = "LOADING";
-const GET_SEASONS = "GET_SEASONS";
+const GET_SEASONSLIST = "GET_SEASONSLIST";
 const GET_UPCOMING = "GET_UPCOMING";
 const GET_AIRING = "GET_AIRING";
 const GET_PICTURES = "GET_PICTURES";
 const SET_SEARCH = "SET_SEARCH";
 const CLEAR_SEARCH = "CLEAR_SEARCH";
 const GET_SEASONSNOW = "GET_SEASONSNOW";
+const GET_ListAnime = "GET_ListAnime";
 
 const reducer = (state, action) => {
     switch(action.type) {
         case LOADING:
             return {...state, loading: true};
-        case GET_SEASONS:
-            return {...state, SeasonsAnime: action.payload, loading: false};
+        case GET_SEASONSLIST:
+            return {...state, SeasonsListAnime: action.payload, loading: false};
         case GET_SEASONSNOW:
-            return {...state, seasonsnow: action.payload, loading: false};   
+            return {...state, ListAnimeSeasons: action.payload, loading: false};
+        case GET_ListAnime:
+            return {...state, ListAnimeSeasons: action.payload, loading: false};   
         default:
             return state;
     }
 }
 export const GlobalContextProvider = ({children}) => {
     const initialState = {
-        SeasonsAnime : [],
+        SeasonsListAnime : [],
+        ListAnimeSeasons : [],
         UpcomingAnime : [],
         airingAnime : [],
         pictures : [],
@@ -43,7 +47,7 @@ export const GlobalContextProvider = ({children}) => {
         dispatch({type: LOADING});
         const response = await fetch(`${baseUrl}/seasons`);
         const data = await response.json();
-        dispatch({type: GET_SEASONS, payload: data.data});
+        dispatch({type: GET_SEASONSLIST, payload: data.data});
     }
     const getSeasonsNow = async() => {
         dispatch({type: LOADING});
@@ -51,6 +55,13 @@ export const GlobalContextProvider = ({children}) => {
         const data = await response.json();
         dispatch({type: GET_SEASONSNOW, payload: data.data});
     }
+    const getListAnimeSeasons = async (year, season) => {
+        dispatch({type: LOADING});
+        const response = await fetch(`${baseUrl}/seasons/${year}/${season}`);
+        const data = await response.json();
+        dispatch({type: GET_ListAnime, payload: data.data});
+    }
+    
     React.useEffect(() => {
         getSeasonsAnime();
         getSeasonsNow();
